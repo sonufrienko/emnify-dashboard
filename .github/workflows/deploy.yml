@@ -22,4 +22,4 @@ jobs:
       - name: Test
         run: npm test -- --forceExit --watchAll=false
       - name: Deploy
-        run: npm deploy
+        run: npm run deploy
