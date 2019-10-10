@@ -10,7 +10,17 @@ class EndpointsRoute extends Component {
     page: 1, 
     perPage: 5,
     sort: "id",
-    filters: "",
+    filters: {
+      status: '',
+      service_profile: '',
+      tariff_profile: '',
+      last_updated: '',
+      created: '',
+      name: '',
+      tags: '',
+      ip_address: '',
+      imei: ''
+    },
   }
 
   async componentDidMount () {
@@ -19,12 +29,18 @@ class EndpointsRoute extends Component {
   }
 
   fetchEndpoints = async (page, perPage, sort, filters) => {
-    const { data, totalCount } = await getEndpoints(page, perPage, sort, filters);
+    const filterStr = Object.keys(filters)
+      .map(key => filters[key] && filters[key].length ? `${key}:${filters[key]}` : null)
+      .filter(item => !!item)
+      .join(',');
+    
+    const { data, totalCount } = await getEndpoints(page, perPage, sort, filterStr);
     this.setState({ endpoints: data, totalCount, page, perPage, sort });
   }
 
   handleChangeFilter = (newFilter) => {
-    console.log('Filter', newFilter);
+    const { page, perPage, sort } = this.state;
+    this.fetchEndpoints(page, perPage, sort, newFilter);
   }
 
   handleChangePage = (event, newPage) => {
