@@ -4,49 +4,34 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, TextField } from '@material-ui/core';
 
-const filterFields = [
-  'status',
-  'service_profile',
-  'tariff_profile',
-  'last_updated',
-  'created',
-  'name',
-  'tags',
-  'ip_address',
-  'imei',
-]
+const filterFields = new Map([
+  ['status', 'Status'],
+  ['service_profile', 'Service Profile'],
+  ['tariff_profile', 'Tariff Profile'],
+  ['last_updated', 'Updated'],
+  ['created', 'Created'],
+  ['name', 'Name'],
+  ['tags', 'Tags'],
+  ['ip_address', 'IP'],
+  ['imei', 'IMEI'],
+]);
 
 const useStyles = makeStyles(theme => ({
   button: {
-    margin: theme.spacing(1),
+    margin: theme.spacing(1)
   }
 }));
 
 export const Container = styled.div`
-    width: 1440px;
-    max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    flex-direction: row;
-    padding-left: 128px;
-    padding-right: 128px;
-    background-color: transparent;
-    @media(max-width: 1360px) {
-        padding-left: 100px;
-        padding-right: 100px;
-    }    
-    @media(max-width: 1300px) {
-        padding-left: 80px;
-        padding-right: 80px;
-    }    
-    @media(max-width: 1250px) {
-        padding-left: 40px;
-        padding-right: 40px;
-    }
-    @media(max-width: 768px) {
-        padding-left: 20px;
-        padding-right: 20px;
-    }      
+  max-width: 620px;
+  padding: 30px 20px 20px 20px;
+  @media (max-width: 768px) {
+    padding: 20px 20px 10px 20px;
+  }
+`;
+
+export const ButtonsContainer = styled.div`
+  text-align: right;
 `;
 
 const Filter = ({ handleChangeFilter, handleCancel, filters }) => {
@@ -59,37 +44,36 @@ const Filter = ({ handleChangeFilter, handleCancel, filters }) => {
 
   const handleSearch = () => {
     handleChangeFilter(values);
-  }
+  };
 
   return (
-    <div style={{ padding: 20 }}>
-        <Grid container spacing={2}>
-          {
-            filterFields.map((field) => (
-              <Grid item xs={6} key={field}>
-                <TextField
-                  id={field}
-                  label={field}
-                  // className={classes.textField}
-                  value={values[field]}
-                  onChange={handleChange(field)}
-                  margin="normal"
-                  variant="outlined"
-                  fullWidth
-                />
-              </Grid>
-            ))
-          }
-        </Grid>
-
-        <Button variant="contained" className={classes.button} onClick={handleCancel}>
+    <Container>
+      <Grid container spacing={2}>
+        {[...filterFields.keys()].map(field => (
+          <Grid item xs={12} sm={6} key={field}>
+            <TextField
+              id={field}
+              label={filterFields.get(field)}
+              value={values[field]}
+              onChange={handleChange(field)}
+              margin="dense"
+              variant="outlined"
+              fullWidth
+            />
+          </Grid>
+        ))}
+      </Grid>
+      
+      <ButtonsContainer>
+        <Button className={classes.button} onClick={handleCancel}>
           Cancel
         </Button>
         <Button variant="contained" color="primary" className={classes.button} onClick={handleSearch}>
           Search
         </Button>
-    </div>
-  )
-}
+      </ButtonsContainer>
+    </Container>
+  );
+};
 
 export default Filter;

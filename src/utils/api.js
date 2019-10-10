@@ -8,7 +8,7 @@ const token = localStore.get('jwt');
 const checkErrorStatus  = (error) => {
     if(error && error.response && error.response.status === 401) {
         localStore.delete('jwt');
-        window.location.href('/');
+        window.location.href = '/';
     }
 }
 
