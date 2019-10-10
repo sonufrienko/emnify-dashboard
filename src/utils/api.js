@@ -4,11 +4,12 @@ import get from 'lodash/get';
 const baseEndpoint = "https://cdn.emnify.net/api/v1";
 const token = "";
 
-export const getEndpoints = (page = 1, perPage = 20, sort = "id") => {
+export const getEndpoints = (page = 1, perPage = 20, sort = "id", filters = "") => {
     const params = {
         page,
         per_page: perPage,
-        sort
+        sort,
+        q: filters
     }
     return axios({
         url: `${baseEndpoint}/endpoint`,
