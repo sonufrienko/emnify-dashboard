@@ -6,8 +6,6 @@ import { Button, TextField } from '@material-ui/core';
 
 const filterFields = new Map([
   ['status', 'Status'],
-  ['service_profile', 'Service Profile'],
-  ['tariff_profile', 'Tariff Profile'],
   ['last_updated', 'Updated'],
   ['created', 'Created'],
   ['name', 'Name'],

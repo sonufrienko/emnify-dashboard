@@ -114,7 +114,6 @@ const LoginRoute = () => {
               variant="outlined"
               name="PaswordInput" 
               value={user.password}
-
               style={{width: "100%"}}
               helperText={errors.password !== '' ? errors.password : ''}
               onChange={e => handleChange('password', e.target.value)}
