@@ -29,10 +29,10 @@ class EndpointsRoute extends Component {
   }
 
   fetchEndpoints = async (page, perPage, sort, filters) => {
-    const filterStr = Object.keys(filters)
+    const filterStr = filters ? Object.keys(filters)
       .map(key => filters[key] && filters[key].length ? `${key}:${filters[key]}` : null)
       .filter(item => !!item)
-      .join(',');
+      .join(',') : '';
     
     const { data, totalCount } = await getEndpoints(page, perPage, sort, filterStr);
     this.setState({ endpoints: data, totalCount, page, perPage, sort });
