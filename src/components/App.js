@@ -39,7 +39,8 @@ const isAuthenticated = () => {
 };
 
 const ProtectedRoute = props => (
-  isAuthenticated === true ? <Route {...props} /> : <Redirect to="/" />
+    <Route {...props} /> : 
+    <Route path={props.path} exact component={LoginRoute} />
 );
 
 const App = () => {
