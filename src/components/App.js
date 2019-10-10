@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import { pink } from '@material-ui/core/colors';
@@ -33,13 +33,22 @@ const theme = createMuiTheme({
   }
 });
 
+const isAuthenticated = () => {
+  // TODO: is token exists in localStorage and valid
+  return false;
+};
+
+const ProtectedRoute = props => (
+  isAuthenticated === true ? <Route {...props} /> : <Redirect to="/" />
+);
+
 const App = () => {
   return (
     <Router>
       <ThemeProvider theme={theme}>
         <Switch>
           <Route path="/" exact component={LoginRoute} />
-          <Route path="/endpoints" exact component={EndpointsRoute} />
+          <ProtectedRoute path="/endpoints" exact component={EndpointsRoute} />
         </Switch>
       </ThemeProvider>
     </Router>
