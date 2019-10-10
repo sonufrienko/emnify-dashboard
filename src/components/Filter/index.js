@@ -49,7 +49,7 @@ export const Container = styled.div`
     }      
 `;
 
-const Filter = ({ handleChangeFilter, filters }) => {
+const Filter = ({ handleChangeFilter, handleCancel, filters }) => {
   const classes = useStyles();
   const [values, setValues] = useState(filters);
 
@@ -82,7 +82,7 @@ const Filter = ({ handleChangeFilter, filters }) => {
           }
         </Grid>
 
-        <Button variant="contained" className={classes.button}>
+        <Button variant="contained" className={classes.button} onClick={handleCancel}>
           Cancel
         </Button>
         <Button variant="contained" color="primary" className={classes.button} onClick={handleSearch}>
