@@ -6,6 +6,7 @@ import { pink } from '@material-ui/core/colors';
 import EndpointsRoute from '../routes/endpoints';
 import LoginRoute from '../routes/login';
 import './App.css';
+import {localStore} from "../utils/store";
 
 const theme = createMuiTheme({
   palette: {
@@ -33,10 +34,7 @@ const theme = createMuiTheme({
   }
 });
 
-const isAuthenticated = () => {
-  // TODO: is token exists in localStorage and valid
-  return true;
-};
+const isAuthenticated = () => !!localStore.get('jwt');
 
 const ProtectedRoute = props => (
   isAuthenticated() === true ? 
