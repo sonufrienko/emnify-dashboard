@@ -9,9 +9,11 @@ import TableFooter from '@material-ui/core/TableFooter';
 import TablePagination from '@material-ui/core/TablePagination';
 import Paper from '@material-ui/core/Paper';
 import get from 'lodash/get';
+import TableHeader from './TableHeader';
 import Collapse from "@material-ui/core/Collapse";
 import DataStructure from './dataStructure';
 import { SubFieldItem,  FieldLabel, TableCellStyles } from './styles';
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -51,14 +53,14 @@ const useWindowSize = () => {
 
   return windowSize;
 }
-
-export default function EndpointsList ({ endpoints, totalCount, page, perPage, handleChangePage, handleChangeRowsPerPage }) {
+export default function EndpointsList ({ endpoints, totalCount, page, perPage, filters, handleChangePage, handleChangeRowsPerPage, handleChangeFilter }) {
         const classes = useStyles();
         const [collapsedRow, setCollapsedRow] = useState(-1);
         const size = useWindowSize();
 
         return (
           <Paper className={classes.root}>
+          <TableHeader title="Devices" handleChangeFilter={handleChangeFilter} filters={filters} />
           <div className={classes.tableWrapper}>
             <Table className={classes.table}>
             {
