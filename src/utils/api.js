@@ -1,8 +1,16 @@
 import axios from 'axios';
 import get from 'lodash/get';
+import {localStore} from './store';
 
 const baseEndpoint = "https://cdn.emnify.net/api/v1";
-const token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjYXB1dGlrZXdAY3JlYXppb25pc2EuY29tIiwiYXVkIjoiXC9hcGlcL3YxXC9hdXRoZW50aWNhdGlvbiIsImVzYy5hcHAiOm51bGwsImFwaV9rZXkiOiIwcjh4NDlEcjh1Nm9taklKRDF5Ukc5N1gwSE9ST0JEYjgwdFhISTdZIiwiZXNjLnVzZXIiOjE5OTEyNCwiZXNjLm9yZyI6NDE5MiwiZXNjLm9yZ05hbWUiOiJNaWNoYWVsIFN0cmVpbmVyIFRlc3QiLCJpc3MiOiJzcGMtZnJvbnRlbmQwMDFAc3BjLWZyb250ZW5kIiwiZXhwIjoxNTcwNzE3NDk3LCJlc2Mucm9sZXMiOlsyLDNdLCJpYXQiOjE1NzA3MDMwOTd9.w1UzFqfpAYeb6HWyLwxC2QIm0zTZEzfOccv3V7rA0l0mPLmuLsIqouS668SL4dv8tMdF4auUaqoXSiNadUFgBA";
+const token = localStore.get('jwt');
+
+const checkErrorStatus  = (error) => {
+    if(error && error.response && error.response.status === 401) {
+        localStore.delete('jwt');
+        window.location.href('/');
+    }
+}
 
 export const getEndpoints = (page = 1, perPage = 20, sort = "id", filters = "") => {
     const params = {
@@ -16,7 +24,7 @@ export const getEndpoints = (page = 1, perPage = 20, sort = "id", filters = "") 
         method: 'GET',
         params,
         headers: {
-          'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${localStore.get('jwt')}`
         }
     }).then(res => {
         console.log("Api result =>", res);
@@ -25,7 +33,21 @@ export const getEndpoints = (page = 1, perPage = 20, sort = "id", filters = "") 
             data: res.data
         }
     }).catch(e => {
+        checkErrorStatus(e);
         console.log("Fetch endpoints error =>", e);
         return [];
     });
+}
+
+export const getAuth = (params) => {
+
+    return axios.post(`${baseEndpoint}/authenticate`, params)
+      .then(function (response) {
+        return response.data
+      })
+      .catch(function (error) {        
+        return {
+            error: error.response.status,
+        }
+      });
 }

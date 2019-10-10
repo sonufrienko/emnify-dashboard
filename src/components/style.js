@@ -37,3 +37,52 @@ export const Container = styled.div`
         padding-right: 20px;
     }      
 `;
+
+export const LoginWrapper = styled.div`
+    background-color: #EDF4F5;    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+`;
+
+
+export const LoginBox = styled.div`
+    width: 100%;
+`;
+
+export const Title = styled.h1`
+    font-size: 60px;
+    line-height: 82px;
+    color: #000000;
+
+    @media(max-width:768px) {
+        font-size: 40px;
+        line-height: 52px;
+    }
+
+    @media(max-width:500px) {
+        font-size: 28px;
+        line-height: 32px;
+    }
+`;
+
+export const ErrorText = styled.p`
+    font-size: 13px;
+    color: red;
+    padding-top: 5px;
+    padding-bottom: 5px;
+`;
+
+
+export const FormInputBox = styled.div`
+    padding-top: 5px;
+    padding-bottom: 5px;
+`;
+
+
+export const SubmitBox = styled.div`
+    padding-top: 35px;
+    padding-bottom: 5px;
+`;
+
