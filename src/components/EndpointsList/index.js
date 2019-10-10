@@ -65,8 +65,8 @@ export default function EndpointsList ({ endpoints, totalCount, page, perPage, f
             <Table className={classes.table}>
             {
               (size.width >= 700) && 
-                <TableHead >
-                  <TableRow> { DataStructure.main.map(item => <TableCell>{ item.title }</TableCell>) }
+                <TableHead>
+                  <TableRow>{ DataStructure.main.map((item, index) => <TableCell key={index}>{ item.title }</TableCell>) }
                   </TableRow>
                 </TableHead>
             }
@@ -80,20 +80,20 @@ export default function EndpointsList ({ endpoints, totalCount, page, perPage, f
                       }}
                       style={{ cursor: 'pointer' }}
                       >
-                      { DataStructure.main.map(item => {
-                        if (!item.custom) return <TableCell  align="left">{get(endpoint, item.pattern, "")}</TableCell>
-                        else return <TableCell  align="left"> {item.custom(get(endpoint, item.pattern), size)} </TableCell>
+                      { DataStructure.main.map((item, index) => {
+                        if (!item.custom) return <TableCell key={index} align="left">{get(endpoint, item.pattern, "")}</TableCell>
+                        else return <TableCell key={index} align="left"> {item.custom(get(endpoint, item.pattern), size)} </TableCell>
                       }) }
                     </TableRow>,
-                    <TableRow  key={`${endpoint.id}_subfield`}>
+                    <TableRow key={`${endpoint.id}_subfield`}>
                     <TableCell style={TableCellStyles} colSpan={6}>
                       <Collapse
                         in={collapsedRow === index}
                         timeout="auto"
                         unmountOnExit
                       >
-                        { DataStructure.subfields.map(item => (
-                          <SubFieldItem>
+                        { DataStructure.subfields.map((item, index) => (
+                          <SubFieldItem key={index}>
                             <FieldLabel> {item.title} </FieldLabel>
                             <span> {get(endpoint, item.pattern, "")} </span>
                           </SubFieldItem>
