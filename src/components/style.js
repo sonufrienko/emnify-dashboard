@@ -44,11 +44,29 @@ export const LoginWrapper = styled.div`
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    @media(max-width: 500px) {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
 `;
 
 
 export const LoginBox = styled.div`
     width: 100%;
+    min-width: 450px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: white;
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+    padding: 40px;
+
+    @media(max-width: 500px) {
+        min-width: 320px;
+    }
+    
 `;
 
 export const Title = styled.h1`
@@ -78,6 +96,7 @@ export const ErrorText = styled.p`
 export const FormInputBox = styled.div`
     padding-top: 5px;
     padding-bottom: 5px;
+    width:100%;
 `;
 
 

@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import {localStore} from '../utils/store';
 import {getAuth} from '../utils/api';
 import { LoginWrapper, LoginBox, Title, ErrorText, FormInputBox, SubmitBox} from '../components/style';
+import logoImage from '../images/logo.png';
 import { async } from 'q';
 const sha1 = require('sha1');
 
@@ -85,7 +86,8 @@ const LoginRoute = () => {
     <LoginWrapper>
       <div>
         <LoginBox>
-        <Title>Sing in</Title>
+        <img src={logoImage} alt="logo emnify" />
+        <Title>Sign in</Title>
         <form onSubmit={e => handleSubmit(e)}>
           <FormInputBox>
             <TextField
@@ -97,6 +99,7 @@ const LoginRoute = () => {
               variant="outlined"
               name="EmailInput" 
               value={user.email}
+              style={{width: "100%"}}
               helperText={errors.email !== '' ? errors.email : ''}
               onChange={e => handleChange('email', e.target.value)}
             />          
@@ -111,6 +114,8 @@ const LoginRoute = () => {
               variant="outlined"
               name="PaswordInput" 
               value={user.password}
+
+              style={{width: "100%"}}
               helperText={errors.password !== '' ? errors.password : ''}
               onChange={e => handleChange('password', e.target.value)}
             />
