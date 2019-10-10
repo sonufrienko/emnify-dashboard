@@ -8,7 +8,7 @@ class EndpointsRoute extends Component {
     endpoints: [],
     totalCount: 0, 
     page: 1, 
-    perPage: 5,
+    perPage: 10,
     sort: "id",
     filters: "",
   }
