@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from "react-router-dom";
 
-import { fade, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
@@ -10,6 +10,8 @@ import Typography from '@material-ui/core/Typography';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+
+import {localStore} from '../utils/store';
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -66,6 +68,7 @@ const AppBarTop = () => {
 
   const handleLogout = () => {
     // remove jwt token
+    localStore.delete('jwt')
     history.push('/')   
   }
 

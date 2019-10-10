@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
-import Login from '../components/Login';
+import { useHistory } from "react-router-dom";
+
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import {localStore} from '../utils/store';
+import {getAuth} from '../utils/api';
 import { LoginWrapper, LoginBox, Title} from '../components/style';
+import { async } from 'q';
+const sha1 = require('sha1');
 
 const initialUser = {
   email: '',
@@ -17,13 +22,22 @@ const LoginRoute = () => {
 
   const [user, updateUser] = useState(initialUser);
   const [errors, updateErrors] = useState(initialErrors);
+  const history = useHistory();
 
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async(e) => {
     e.preventDefault();
     if(validate()) {
-      
-    } 
-
+      const params = {
+          username: user.email,
+          password: sha1(user.password)
+      }
+      let res = await getAuth(params);
+      if(res && res.auth_token) {
+        localStore.set('jwt', res.auth_token);
+        history.push('/endpoints');
+      }
+    }
     return false;
   }
 
@@ -56,6 +70,7 @@ const LoginRoute = () => {
     }
 
     updateErrors(Object.assign({}, errors, err));
+    
     if(err.email !== "" || err.password !== "") {
       return false;
     }    
@@ -99,8 +114,7 @@ const LoginRoute = () => {
           <br />
 
           <Button variant="contained" type="submit" color="primary">Sign in</Button>
-        </form>
-          
+        </form>          
         </LoginBox>
       </div>      
     </LoginWrapper>

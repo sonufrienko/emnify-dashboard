@@ -28,3 +28,32 @@ export const getEndpoints = (page = 1, perPage = 20, sort = "id") => {
         return [];
     });
 }
+
+export const getAuth = (params) => {
+
+    console.log(params);
+
+    return axios.post(`${baseEndpoint}/authenticate`, params)
+      .then(function (response) {
+        return response.data
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    // return axios({
+    //     url: `${baseEndpoint}/authenticate`,
+    //     method: 'POST',
+    //     data: JSON.stringify(params),
+    //     headers: {
+    //         'Accept':'application/json',
+    //         'Content-Type':'application/json'
+    //     }
+    // }).then(res => {
+    //     console.log("Api result =>", res);
+    //     return res.data;
+    // }).catch(e => {
+    //     console.log("Fetch endpoints error =>", e);
+    //     return e;
+    // });
+}
