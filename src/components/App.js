@@ -1,24 +1,49 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+import { pink } from '@material-ui/core/colors';
+import EndpointsRoute from '../routes/endpoints';
+import LoginRoute from '../routes/login';
 import './App.css';
 
-function App() {
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#1976d2'
+    },
+    secondary: pink
+  },
+  overrides: {
+    MuiListItem: {
+      gutters: {
+        paddingLeft: 25
+      }
+    },
+    MuiContainer: {
+      root: {
+        marginTop: 20
+      }
+    },
+    MuiTypography: {
+      h6: {
+        fontWeight: 400
+      }
+    }
+  }
+});
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <ThemeProvider theme={theme}>
+        <Switch>
+          <Route path="/" exact component={LoginRoute} />
+          <Route path="/endpoints" exact component={EndpointsRoute} />
+        </Switch>
+      </ThemeProvider>
+    </Router>
   );
-}
+};
 
 export default App;
