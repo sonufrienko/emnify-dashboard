@@ -1,6 +1,8 @@
-import React, { Component } from 'react';
-import EndpointsList from '../components/EndpointsList';
+import React, { Component, Fragment } from 'react';
 import { getEndpoints } from '../utils/api';
+import AppBarTop from '../components/AppBarTop';
+import EndpointsList from '../components/EndpointsList';
+import { Root } from '../components/style';
 class EndpointsRoute extends Component {
   state = {
     endpoints: [],
@@ -33,17 +35,24 @@ class EndpointsRoute extends Component {
 
   render() {
     const { endpoints, page, perPage, totalCount } = this.state;
-    console.log({page, perPage, totalCount});
-    if (!endpoints || endpoints.length === 0) return <h1> Loading ... </h1>
+    console.log("Render table with params ==>", { page, perPage, totalCount });
     return (
-      <EndpointsList 
-        endpoints={endpoints} 
-        page={page} 
-        perPage={perPage} 
-        totalCount={totalCount} 
-        handleChangePage={this.handleChangePage}
-        handleChangeRowsPerPage={this.handleChangeRowsPerPage}
-      />
+    <Fragment>
+      <AppBarTop />
+      <Root>
+        {
+          (!endpoints || endpoints.length === 0) ? <h1> Loading ... </h1> :
+          <EndpointsList 
+              endpoints={endpoints} 
+              page={page} 
+              perPage={perPage} 
+              totalCount={totalCount} 
+              handleChangePage={this.handleChangePage}
+              handleChangeRowsPerPage={this.handleChangeRowsPerPage}
+            />
+        }
+      </Root>
+    </Fragment>
     )
   }
 }

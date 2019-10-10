@@ -7,6 +7,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableFooter from '@material-ui/core/TableFooter';
 import TablePagination from '@material-ui/core/TablePagination';
+import Paper from '@material-ui/core/Paper';
 import get from 'lodash/get';
 
 const useStyles = makeStyles(theme => ({
@@ -23,6 +24,8 @@ const useStyles = makeStyles(theme => ({
 export default function EndpointsList ({ endpoints, totalCount, page, perPage, handleChangePage, handleChangeRowsPerPage }) {
         const classes = useStyles();
         return (
+          <Paper className={classes.root}>
+          <div className={classes.tableWrapper}>
             <Table className={classes.table}>
                 <TableHead>
                 <TableRow>
@@ -50,7 +53,6 @@ export default function EndpointsList ({ endpoints, totalCount, page, perPage, h
                   <TableRow>
                     <TablePagination
                       rowsPerPageOptions={[5, 10, 25]}
-                      colSpan={3}
                       count={totalCount}
                       rowsPerPage={perPage}
                       page={page -1}
@@ -64,5 +66,7 @@ export default function EndpointsList ({ endpoints, totalCount, page, perPage, h
                   </TableRow>
               </TableFooter>
             </Table>
+            </div>
+            </Paper>
         )
 }
