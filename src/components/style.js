@@ -66,3 +66,23 @@ export const Title = styled.h1`
         line-height: 32px;
     }
 `;
+
+export const ErrorText = styled.p`
+    font-size: 13px;
+    color: red;
+    padding-top: 5px;
+    padding-bottom: 5px;
+`;
+
+
+export const FormInputBox = styled.div`
+    padding-top: 5px;
+    padding-bottom: 5px;
+`;
+
+
+export const SubmitBox = styled.div`
+    padding-top: 35px;
+    padding-bottom: 5px;
+`;
+

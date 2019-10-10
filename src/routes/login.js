@@ -5,7 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import {localStore} from '../utils/store';
 import {getAuth} from '../utils/api';
-import { LoginWrapper, LoginBox, Title} from '../components/style';
+import { LoginWrapper, LoginBox, Title, ErrorText, FormInputBox, SubmitBox} from '../components/style';
 import { async } from 'q';
 const sha1 = require('sha1');
 
@@ -16,17 +16,20 @@ const initialUser = {
 const initialErrors = {
   email: '',
   password: '',
+  global: '',
 }
 
 const LoginRoute = () => {
 
   const [user, updateUser] = useState(initialUser);
   const [errors, updateErrors] = useState(initialErrors);
+  const [errorGlobal, updateErrorGlobal] = useState("");
   const history = useHistory();
 
 
   const handleSubmit = async(e) => {
     e.preventDefault();
+    updateErrorGlobal('');
     if(validate()) {
       const params = {
           username: user.email,
@@ -35,7 +38,10 @@ const LoginRoute = () => {
       let res = await getAuth(params);
       if(res && res.auth_token) {
         localStore.set('jwt', res.auth_token);
+        
         history.push('/endpoints');
+      } else {
+        updateErrorGlobal('Invalid email or password!');
       }
     }
     return false;
@@ -53,10 +59,8 @@ const LoginRoute = () => {
     let err = {
       email: '',
       password: '',
-    };
-    
+    };    
     let reg = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
-
     if(
         !user.email || user.email === "" ||
         reg.test(user.email) === false
@@ -80,40 +84,48 @@ const LoginRoute = () => {
   return (
     <LoginWrapper>
       <div>
-        <Title>Sing in</Title>
         <LoginBox>
+        <Title>Sing in</Title>
         <form onSubmit={e => handleSubmit(e)}>
-          <TextField
-            error={errors.email === '' ? false : true}
-            id="outlined-error"
-            label="Email"
-            type="email"
-            margin="normal"
-            variant="outlined"
-            name="EmailInput" 
-            value={user.email}
-            helperText={errors.email !== '' ? errors.email : ''}
-            onChange={e => handleChange('email', e.target.value)}
-          />
+          <FormInputBox>
+            <TextField
+              error={errors.email === '' ? false : true}
+              id="outlined-error"
+              label="Email"
+              type="text"
+              margin="normal"
+              variant="outlined"
+              name="EmailInput" 
+              value={user.email}
+              helperText={errors.email !== '' ? errors.email : ''}
+              onChange={e => handleChange('email', e.target.value)}
+            />          
+          </FormInputBox>
+          <FormInputBox>
+            <TextField
+              error={errors.password === '' ? false : true}
+              type="password"
+              id="outlined-error"
+              label="Password"
+              margin="normal"
+              variant="outlined"
+              name="PaswordInput" 
+              value={user.password}
+              helperText={errors.password !== '' ? errors.password : ''}
+              onChange={e => handleChange('password', e.target.value)}
+            />
+          </FormInputBox>
           
-          <br />
-          <TextField
-            error={errors.password === '' ? false : true}
-            type="password"
-            id="outlined-error"
-            label="Password"
-            margin="normal"
-            variant="outlined"
-            name="PaswordInput" 
-            value={user.password}
-            helperText={errors.password !== '' ? errors.password : ''}
-            onChange={e => handleChange('password', e.target.value)}
-          />
-          <br />
-          <br />
-          <br />
-
-          <Button variant="contained" type="submit" color="primary">Sign in</Button>
+          
+          {errorGlobal !=='' && (
+            <ErrorText>
+              {errorGlobal}
+            </ErrorText>
+          )}
+          <SubmitBox>
+            <Button variant="contained" type="submit" color="primary">Sign in</Button>
+          </SubmitBox>
+          
         </form>          
         </LoginBox>
       </div>      
