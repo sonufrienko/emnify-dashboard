@@ -6,8 +6,8 @@ export const Root = styled.div`
     padding-right: 20px;
     padding-top: 80px;
     @media(max-width: 768px) {
-        padding-left: 20px;
-        padding-right: 20px;
+        padding-left: 0;
+        padding-right: 0;
     }  
 `;
 
