@@ -2,8 +2,9 @@ import styled from 'styled-components';
 
 export const Root = styled.div`
     overflow: hidden;
-    padding-left: 40px;
-    padding-right: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 80px;
     @media(max-width: 768px) {
         padding-left: 20px;
         padding-right: 20px;
