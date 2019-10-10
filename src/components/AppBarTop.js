@@ -1,16 +1,13 @@
 import React from 'react';
 import { useHistory } from "react-router-dom";
-
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-
 import {localStore} from '../utils/store';
 
 const useStyles = makeStyles(theme => ({
@@ -21,37 +18,14 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(2),
   },
   title: {
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
       display: 'block',
-    },
   },
   inputRoot: {
     color: 'inherit',
   },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 7),
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: 200,
-    },
-  },
-  sectionDesktop: {
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'flex',
-    },
-  },
-  sectionMobile: {
-    display: 'flex',
-    [theme.breakpoints.up('sm')]: {
-      display: 'none',
-    },
-  },
 }));
 
-const AppBarTop = () => {
+const AppBarTop = ({title}) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const history = useHistory();
@@ -71,11 +45,7 @@ const AppBarTop = () => {
     localStore.delete('jwt')
     history.push('/')   
   }
-
-  const handleFilterClick = () => {
-
-  }
-
+  
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -96,14 +66,9 @@ const AppBarTop = () => {
       <AppBar position="fixed">
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
-            Page Title
+            {title}
           </Typography>
-          <div className={classes.sectionMobile} >
-            <Button color="primary" variant="contained" onClick={handleFilterClick}>Filter</Button> 
-            <Button color="secondary" variant="contained" onClick={handleFilterClick}>Sort</Button>
-          </div>          
           <div className={classes.grow} />
-          
           <div>            
             <IconButton
               edge="end"

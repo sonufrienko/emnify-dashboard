@@ -59,7 +59,7 @@ class EndpointsRoute extends Component {
     console.log("Render table with params ==>", { page, perPage, totalCount });
     return (
     <Fragment>
-      <AppBarTop />
+      <AppBarTop title={"Endpoints"} />
       <Root>
         {
           (!endpoints) ? <h1> Loading ... </h1> :
