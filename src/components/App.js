@@ -35,21 +35,25 @@ const theme = createMuiTheme({
 
 const isAuthenticated = () => {
   // TODO: is token exists in localStorage and valid
-  return false;
+  return true;
 };
 
 const ProtectedRoute = props => (
-  isAuthenticated === true ? <Route {...props} /> : <Redirect to="/" />
+  isAuthenticated() === true ? 
+    <Route {...props} /> : 
+    <Redirect to="/" />
 );
 
 const App = () => {
+  const basename = window.location.pathname.startsWith('/emnify-dashboard/') ?
+  '/emnify-dashboard': '';
+
   return (
-    <Router>
+    <Router basename={basename}>
       <ThemeProvider theme={theme}>
         <Switch>
           <Route path="/" exact component={LoginRoute} />
-          {/* <ProtectedRoute path="/endpoints" exact component={EndpointsRoute} /> */}
-          <Route path="/endpoints" exact component={EndpointsRoute} />
+          <ProtectedRoute path="/endpoints" exact component={EndpointsRoute} />
         </Switch>
       </ThemeProvider>
     </Router>
