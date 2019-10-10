@@ -34,13 +34,7 @@ const theme = createMuiTheme({
   }
 });
 
-const isAuthenticated = () => {
-  // TODO: is token exists in localStorage and valid
-  if(localStore.get('jwt')) {
-    return true;
-  }
-  return false;
-};
+const isAuthenticated = () => !!localStore.get('jwt');
 
 const ProtectedRoute = props => (
   isAuthenticated() === true ? 
