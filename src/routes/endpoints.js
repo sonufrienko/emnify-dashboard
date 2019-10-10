@@ -23,6 +23,10 @@ class EndpointsRoute extends Component {
     this.setState({ endpoints: data, totalCount, page, perPage, sort });
   }
 
+  handleChangeFilter = (newFilter) => {
+    console.log('Filter', newFilter);
+  }
+
   handleChangePage = (event, newPage) => {
     const { perPage, sort, filters } = this.state;
     this.fetchEndpoints(newPage+1, perPage, sort, filters);
@@ -35,7 +39,7 @@ class EndpointsRoute extends Component {
   }
 
   render() {
-    const { endpoints, page, perPage, totalCount } = this.state;
+    const { endpoints, page, perPage, totalCount, filters } = this.state;
     console.log("Render table with params ==>", { page, perPage, totalCount });
     return (
     <Fragment>
@@ -48,6 +52,8 @@ class EndpointsRoute extends Component {
               page={page} 
               perPage={perPage} 
               totalCount={totalCount} 
+              filters={filters}
+              handleChangeFilter={this.handleChangeFilter}
               handleChangePage={this.handleChangePage}
               handleChangeRowsPerPage={this.handleChangeRowsPerPage}
             />
