@@ -5,13 +5,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Button, TextField } from '@material-ui/core';
 
 const filterFields = new Map([
-  ['status', 'Status'],
+  ['name', 'Name'],
+  ['imei', 'IMEI'],
   ['last_updated', 'Updated'],
   ['created', 'Created'],
-  ['name', 'Name'],
   ['tags', 'Tags'],
   ['ip_address', 'IP'],
-  ['imei', 'IMEI'],
 ]);
 
 const useStyles = makeStyles(theme => ({
