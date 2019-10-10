@@ -62,7 +62,7 @@ class EndpointsRoute extends Component {
       <AppBarTop />
       <Root>
         {
-          (!endpoints || endpoints.length === 0) ? <h1> Loading ... </h1> :
+          (!endpoints) ? <h1> Loading ... </h1> :
           <EndpointsList 
               endpoints={endpoints} 
               page={page} 
