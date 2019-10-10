@@ -53,8 +53,7 @@ const App = () => {
       <ThemeProvider theme={theme}>
         <Switch>
           <Route path="/" exact component={LoginRoute} />
-          {/* <ProtectedRoute path="/endpoints" exact component={EndpointsRoute} /> */}
-          <Route path="/endpoints" exact component={EndpointsRoute} />
+          <ProtectedRoute path="/endpoints" exact component={EndpointsRoute} />
         </Switch>
       </ThemeProvider>
     </Router>
