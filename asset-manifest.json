@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/emnify-dashboard/static/css/main.8699028c.chunk.css",
+    "main.js": "/emnify-dashboard/static/js/main.04bb82fb.chunk.js",
+    "main.js.map": "/emnify-dashboard/static/js/main.04bb82fb.chunk.js.map",
+    "runtime-main.js": "/emnify-dashboard/static/js/runtime-main.5ad9b9bf.js",
+    "runtime-main.js.map": "/emnify-dashboard/static/js/runtime-main.5ad9b9bf.js.map",
+    "static/js/2.93f5c77d.chunk.js": "/emnify-dashboard/static/js/2.93f5c77d.chunk.js",
+    "static/js/2.93f5c77d.chunk.js.map": "/emnify-dashboard/static/js/2.93f5c77d.chunk.js.map",
+    "index.html": "/emnify-dashboard/index.html",
+    "precache-manifest.a5c2c8958d03e3b834a7f49885bda61d.js": "/emnify-dashboard/precache-manifest.a5c2c8958d03e3b834a7f49885bda61d.js",
+    "service-worker.js": "/emnify-dashboard/service-worker.js",
+    "static/css/main.8699028c.chunk.css.map": "/emnify-dashboard/static/css/main.8699028c.chunk.css.map"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5ad9b9bf.js",
+    "static/js/2.93f5c77d.chunk.js",
+    "static/css/main.8699028c.chunk.css",
+    "static/js/main.04bb82fb.chunk.js"
+  ]
+}
