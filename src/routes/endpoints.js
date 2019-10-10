@@ -9,28 +9,29 @@ class EndpointsRoute extends Component {
     totalCount: 0, 
     page: 1, 
     perPage: 5,
-    sort: "id"
+    sort: "id",
+    filters: "",
   }
 
   async componentDidMount () {
-    const { page, perPage, sort } = this.state;
-    this.fetchEndpoints(page, perPage, sort);
+    const { page, perPage, sort, filters } = this.state;
+    this.fetchEndpoints(page, perPage, sort, filters);
   }
 
-  fetchEndpoints = async (page, perPage, sort ) => {
-    const { data, totalCount } = await getEndpoints(page, perPage, sort);
+  fetchEndpoints = async (page, perPage, sort, filters) => {
+    const { data, totalCount } = await getEndpoints(page, perPage, sort, filters);
     this.setState({ endpoints: data, totalCount, page, perPage, sort });
   }
 
   handleChangePage = (event, newPage) => {
-    const { perPage, sort } = this.state;
-    this.fetchEndpoints(newPage+1, perPage, sort);
+    const { perPage, sort, filters } = this.state;
+    this.fetchEndpoints(newPage+1, perPage, sort, filters);
   }
 
   handleChangeRowsPerPage = (event) => {
     const perPage = parseInt(event.target.value, 10);
-    const { page, sort } = this.state;
-    this.fetchEndpoints(page, perPage, sort);
+    const { page, sort, filters } = this.state;
+    this.fetchEndpoints(page, perPage, sort, filters);
   }
 
   render() {
