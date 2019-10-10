@@ -36,6 +36,11 @@ const TableHeader = ({ title, handleChangeFilter, filters }) => {
     setAnchorEl(null);
   };
 
+  const onFilter = filter => {
+    setAnchorEl(null);
+    handleChangeFilter(filter);
+  }
+
   const open = Boolean(anchorEl);
 
   return (
@@ -65,7 +70,7 @@ const TableHeader = ({ title, handleChangeFilter, filters }) => {
             horizontal: 'center'
           }}
         >
-          <Filter handleChangeFilter={handleChangeFilter} filters={filters} />
+          <Filter handleChangeFilter={onFilter} handleCancel={handleClose} filters={filters} />
         </Popover>
       </div>
     </Toolbar>
